@@ -3,5 +3,13 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  form(action='/saveForm', method='post')
+    label
+      | Name:
+      input(name='NameInput')
 
-  input(type="checkbox")
+    label
+      | Resons for visit:
+      input(name='Reason')
+
+    input(type='submit', value='Submit')
