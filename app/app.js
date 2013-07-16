@@ -13,7 +13,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
-app.use(orm.express("pg://nwkzcduuzrrwvj:3tigo813gx8S2pNySHQ8RnqWGs@ec2-54-225-106-227.compute-1.amazonaws.com:5432/d2krouf7g7ll7t", {
+app.use(orm.express("pg://postgres@127.0.0.1:5432/second_opinion", {
     define: function (db, models) {
          models.patient = db.define("patient", {
             name: String,
