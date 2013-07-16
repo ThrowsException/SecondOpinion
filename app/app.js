@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
@@ -18,23 +13,34 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
-/*app.use(orm.express("pg://postgres@127.0.0.1:5432/second_opinion", {
+app.use(orm.express("pg://postgres@127.0.0.1:5432/second_opinion", {
     define: function (db, models) {
-        models.forms = db.define("forms", {
+         models.patient = db.define("patient", {
             name: String,
-            reason: String
+            address: String,
+            city: String,
+            State: String,
+            Zip: String,
+            phone: String,
          });
-
-         db.on('connect', function(err, db) {
-            if(err) {
-                console.log(err);
-            }
-            else {
-                console.log("Connected");
-            }
+         
+         models.physician = db.define("physician", {
+            name: String
          });
+         
+         models.visit = db.define("visit", {
+            signature_date: Date,
+            diagnoses: String,
+            questions: String,
+            reason: String,
+            date: Date,
+            disclaimer_signature: String,
+            disclaimer_date: String
+         });
+         
+         db.sync();
     }
-}));*/
+}));
 
 app.use(lessMiddleware({src: __dirname + '/public'}));
 app.use(express.favicon());
@@ -44,56 +50,47 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-var opts = {
-  database : "second_opinion",
-  protocol : "postgres",
-  host     : "127.0.0.1",
-  port     : 5432,         // optional, defaults to database default
-  user     : "throwsexception",
-  password : "",
-  query    : {
-    //pool     : true|false,   // optional, false by default
-    //debug    : true|false,   // optional, false by default
-    //strdates : true|false    // optional, false by default
-  }
-};
-orm.connect(opts, function (err, db) {
-    if(err) {
-        console.log(err);
-    }
-    var Form = db.define('form', {
-        name    : String,
-        reason  : String
-    });
-
-    Form.sync();
-    console.log("connected");
-});
-
-
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);
-app.post('/saveForm', function(req, res) {
-        orm.connect(opts, function (err, db) {
-            if(err) {
-                console.log(err);
-            }
-            if(err) {
-                console.log(err);
-            }
-            var Form = db.define('form', {
-                name    : String,
-                reason  : String
-            });
-
-            var form = new Form({name: req.body.NameInput, reason: req.body.Reason});
-            form.save(function(err, form) {});
-        });
-        res.redirect('/');
+app.post('/saveForm', function(req, res) { 
+            debugger;                
+            req.models.visit.create({
+                diagnoses: req.body.diagnoses, 
+                questions: req.body.questions, 
+                reason: req.body.reason, 
+                signature_date: req.body.signature_date,
+                disclaimer_signature: req.body.disclaimer_signature,
+                disclaimer_date: req.body.disclaimer_date
+            }, function(err, visit) {
+                    console.log(err);
+                }
+            );
+            
+            req.models.patient.create({
+                name: req.body.name,
+                address: req.body.adress,
+                city: req.body.city,
+                state: req.body.state,
+                zip: req.body.zip,
+                phone: req.body.phone
+            }, function(err, patient) {
+                    console.log(err);
+                }
+            );
+            
+            req.models.physician.create({
+                name: req.body.NameInput, 
+                reason: req.body.Reason
+            }, function(err, physician) {
+                    console.log(err);
+                }
+            );
+            
+        res.send('Thanks Jeff');
     });
 
 http.createServer(app).listen(app.get('port'), function(){
