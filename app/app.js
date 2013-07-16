@@ -19,9 +19,9 @@ app.use(orm.express("pg://postgres@127.0.0.1:5432/second_opinion", {
             name: String,
             address: String,
             city: String,
-            State: String,
-            Zip: String,
-            phone: String,
+            state: String,
+            zip: String,
+            phone: String
          });
          
          models.physician = db.define("physician", {
@@ -62,6 +62,7 @@ app.post('/saveForm', function(req, res) {
                 diagnoses: req.body.diagnoses, 
                 questions: req.body.questions, 
                 reason: req.body.reason, 
+                date: new Date(),
                 signature_date: req.body.signature_date,
                 disclaimer_signature: req.body.disclaimer_signature,
                 disclaimer_date: req.body.disclaimer_date
@@ -72,7 +73,7 @@ app.post('/saveForm', function(req, res) {
             
             req.models.patient.create({
                 name: req.body.name,
-                address: req.body.adress,
+                address: req.body.address,
                 city: req.body.city,
                 state: req.body.state,
                 zip: req.body.zip,
