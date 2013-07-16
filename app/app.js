@@ -83,8 +83,7 @@ app.post('/saveForm', function(req, res) {
             );
             
             req.models.physician.create({
-                name: req.body.NameInput, 
-                reason: req.body.Reason
+                name: req.body.physician_name
             }, function(err, physician) {
                     console.log(err);
                 }
