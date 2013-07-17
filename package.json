@@ -1,15 +1,33 @@
 {
-  "name": "SecondOpinions",
+  "name": "second_opinion",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app.js"
-  },
+  }
   "dependencies": {
     "express": "3.3.4",
-    "jade": "*",
-    "less-middleware": "*",
-    "orm": "*",
-    "pg": "~1.0.0"
+    "jade": "0.33.0",
+    "less-middleware": "0.1.12",
+    "orm": "2.0.15",
+    "pg": "1.0.4",
+    "passport": "0.1.17",
+    "passport-local": "0.1.6"
+  },
+  "description": "npm install",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ThrowsException/SecondOpinion.git"
+  },
+  "keywords": [
+    "node",
+    "healthcare"
+  ],
+  "author": "Chester ONeill",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/ThrowsException/SecondOpinion/issues"
   }
 }

@@ -2,7 +2,18 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  
+  form(action='/login', method='post')
+    label Username:
+    input(type="text", name="username")
+   
+    label Password:
+    input(type='password', name='password')
+    
+    input(type='submit', value='Log In')
+
+  h2 Welcome to #{title}
+  
   form(action='/saveForm', method='post')
     
     label 
