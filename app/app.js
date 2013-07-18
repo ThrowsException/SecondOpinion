@@ -11,56 +11,45 @@ var express = require('express')
 
 var app = express();
 
-//Setup node orm for use with postgres
-app.use(orm.express("pg://postgres@127.0.0.1:5432/second_opinion", {
+//  Setup node orm for use with postgres
+//  probably should be using some kind of config file for this
+app.use(orm.express("pg://postgres@127.0.0.1:5432/second_opinion", {   
     define: function (db, models) {
-         models.patient = db.define("patient", {
-            name: String,
-            address: String,
-            city: String,
-            state: String,
-            zip: String,
-            phone: String
-         });
-         
-         models.physician = db.define("physician", {
-            name: String
-         });
-         
-         models.user = db.define("user", {
-            username: String, 
-            password: String
-         });
-         
-         models.visit = db.define("visit", {
-            signature_date: Date,
-            diagnoses: String,
-            questions: String,
-            reason: String,
-            date: Date,
-            disclaimer_signature: String,
-            disclaimer_date: String
-         });
-         
-         db.sync();
+        db.load('./models', function(err) { 
+            if(err) {
+                console.log(err);
+            }
+                
+            models.user = db.models.user;
+            models.patient = db.models.patient;
+            models.physician = db.models.physician;
+            models.visit = db.models.visit;
+           
+            db.sync();
+        });
     }
 }));
 
-var users = [];
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
 //   this will be as simple as storing the user ID when serializing, and finding
 //   the user by ID when deserializing.
 passport.serializeUser(function(user, done) {
-  users.push(user);
   done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-    users(id, function (err, user) {
-    done(err, user);
-  });
+    orm.connect("pg://postgres@127.0.0.1:5432/second_opinion", function(err, db) {
+        var User = db.define("user", { username: String });
+        
+        User.find({ id: id }, function(err, user) {
+          if (err) { return done(err); }
+          if (!user[0]) { return done(err); }
+           
+          return done(null, user[0]);
+        });
+      });
 });
 
 passport.use(new LocalStrategy(
@@ -89,10 +78,12 @@ app.set('view engine', 'jade');
 app.use(lessMiddleware({src: __dirname + '/public'}));
 app.use(express.favicon());
 app.use(express.logger('dev'));
+app.use(express.cookieParser());
 app.use(express.bodyParser());
+app.use(express.cookieSession({ secret: 'secopapp89!', cookie: { maxAge: 24 * 60 * 60 * 1000 }}));
 app.use(express.methodOverride());
 app.use(passport.initialize());
-//app.use(passport.session());
+app.use(passport.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -103,7 +94,8 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
-app.get('/admin', function(req, res){
+app.get('/admin', ensureAuthenticated, function(req, res){
+    debugger;
   req.models.visit.find(function(err, visits){
     res.render('admin', { visits: visits });
   }); 
@@ -115,40 +107,40 @@ app.post('/login',
                                    failureFlash: false })
 );
 app.post('/saveForm', function(req, res) {           
-            req.models.visit.create({
-                diagnoses: req.body.diagnoses, 
-                questions: req.body.questions, 
-                reason: req.body.reason, 
-                date: new Date(),
-                signature_date: req.body.signature_date,
-                disclaimer_signature: req.body.disclaimer_signature,
-                disclaimer_date: req.body.disclaimer_date
-            }, function(err, visit) {
-                    console.log(err);
-                }
-            );
+    req.models.visit.create({
+        diagnoses: req.body.diagnoses, 
+        questions: req.body.questions, 
+        reason: req.body.reason, 
+        date: new Date(),
+        signature_date: req.body.signature_date,
+        disclaimer_signature: req.body.disclaimer_signature,
+        disclaimer_date: req.body.disclaimer_date
+    }, function(err, visit) {
+            console.log(err);
+        }
+    );
+    
+    req.models.patient.create({
+        name: req.body.name,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zip: req.body.zip,
+        phone: req.body.phone
+    }, function(err, patient) {
+            console.log(err);
+        }
+    );
+    
+    req.models.physician.create({
+        name: req.body.physician_name
+    }, function(err, physician) {
+            console.log(err);
+        }
+    );
             
-            req.models.patient.create({
-                name: req.body.name,
-                address: req.body.address,
-                city: req.body.city,
-                state: req.body.state,
-                zip: req.body.zip,
-                phone: req.body.phone
-            }, function(err, patient) {
-                    console.log(err);
-                }
-            );
-            
-            req.models.physician.create({
-                name: req.body.physician_name
-            }, function(err, physician) {
-                    console.log(err);
-                }
-            );
-            
-        res.redirect('/');
-    });
+    res.redirect('/');
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
