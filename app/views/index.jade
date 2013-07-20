@@ -1,76 +1,24 @@
 extends layout
 
 block content
-  h1= title
+  include partials/header
   
-  form(action='/login', method='post')
-    label Username:
-    input(type="text", name="username")
-   
-    label Password:
-    input(type='password', name='password')
+  h2#welcome_message Welcome to #{title}
+  div#landing_screen
+    h3 Tell us why you're here today
     
-    input(type='submit', value='Log In')
-
-  h2 Welcome to #{title}
-  
-  form(action='/saveForm', method='post')
-    
-    label 
-      | Name:
-      input(name='name')
-    
-    label 
-      | Date:
-      input(name='signature_date', type='date')
-      
-    label 
-      | Treating/Referring Physician Name:
-      input(name='physician_name')
-      
-    label 
-      | Street Address:
-      input(name='address')
-      
-    label
-      | City:
-      input(name='city')
-      
-    label
-      | State:
-      input(name='state')
-      
-    label
-      | Zip:
-      input(name='zip')
-      
-    label
-      | Phone Number:
-      input(name='phone')
-      
-     p
-     | BY ENGAGING OUR SERVICES, YOU ACKNOWLEDGE AND AGREE TO ASSUME THE RISK OF THESE LIMITATIONS. 
-     | YOU FURTHER UNDERSTAND THAT NO WARRANTY OR GUARANTEE HAS BEEN MADE TO YOU CONCERNING ANY 
-     | PARTICULAR RESULT OR CURE OF YOUR CONDITION.
-
-    label
-      | Signature:
-      input(name='disclaimer_signature')
-     
-    label
-      | Date:
-      input(name='disclaimer_date', type='date')
-      
-    label
-      | What is your diagnoses/disease/disorder in question:
-      textarea(name='diagnoses')
-      
-    label
-      | What explicit questions do you want answered within the remote second opinion?:
-      textarea(name='questions')
-    
-    label
-      | What do you hope to gain by engaging the services of a remote second opinion? :
-      textarea(name='reason')
-    
-    input(type='submit', value='Submit')
+    ul#diseases
+      li 
+        a(href='brain_tumor') Brain Tumor
+      li 
+        a(href='brain_tumor') Headache
+      li
+        a(href='brain_tumor') Hydrocephalus and CSF Disorders
+      li
+        a(href='brain_tumor') Neuroimmunology & Neurological Infections
+      li
+        a(href='brain_tumor') Neuromuscular Pathology
+      li
+        a(href='brain_tumor') Pediatric Neurology
+      li
+        a(href='brain_tumor') Spine Neurosurgery

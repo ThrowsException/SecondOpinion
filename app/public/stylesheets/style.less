@@ -1,29 +1,140 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300);
+
+@date-width: 200px;
+@small-text-inputLength: 200px;
+@medium-text-inputLength: 400px;
+@large-text-inputLength: 600px;
+
+@small-textAreaWidth: 200px;
+@medium-textAreaWidth: 400px;
+@large-textAreaWidth: 600px;
+
 body {
-  padding: 50px;
-  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-
-form {
-  width: 800px;
-  padding: 20px;
-}
-
-label {
-  width: 300px; 
-  display: block;
+  font-family: 'Open Sans', sans-serif;
 }
 
 input {
-  width: 400px;
-  margin-bottom: 10px;
+    -webkit-border-radius: 5px; //For Safari, etc.
+    -moz-border-radius: 5px; //For Mozilla, etc.
+    border-radius: 5px; //CSS3 Feature
 }
 
-textarea {
-  width: 400px;
-  height: 200px;
-  margin-bottom: 10px;
+p {
+  margin: 10px;
+}
+
+b {
+  font-weight: bold;
+}
+
+header {
+  div {
+    height: 60px;
+    background: #3078F0;
+    color: #FFFFFF;
+    
+    h1 {
+      font-size: 40px;
+      margin: 8px 0px;
+    }
+    * {
+      float: left;
+    }
+    
+    form {
+      margin: 15px 2px;
+      float: right;
+    }
+  }
+}
+
+#welcome_message {
+  font-size: 24px;
+  margin: 20px 10px;
+}
+
+#landing_screen {
+  margin-left: 10px;
+}
+
+#diseases {
+  counter-reset: li;
+  a {
+	  position: relative;
+	  display: block;
+	  padding: .4em .4em .4em .8em;
+	  *padding: .4em;
+	  margin: .5em 0 .5em 2.5em;
+	  background: #ddd;
+	  color: #444;
+	  text-decoration: none;
+	  transition: all .3s ease-out;	
+	  
+	  &:hover {
+      background: #eee;
+      
+      &:after {
+	      left: -.5em;
+	      border-left-color: #3078F0;				
+      }	
+    }
+    
+    &:before {
+	    content: counter(li);
+	    counter-increment: li;
+	    position: absolute;	
+	    left: -2.5em;
+	    top: 50%;
+	    margin-top: -1em;
+	    background: #3078F0;
+	    height: 2em;
+	    width: 2em;
+	    line-height: 2em;
+	    text-align: center;
+	    font-weight: bold;
+    }
+    
+    &:after {
+	    position: absolute;	
+	    content: '';
+	    border: .5em solid transparent;
+	    left: -1em;
+	    top: 50%;
+	    margin-top: -.5em;
+	    transition: all .3s ease-out;				
+    }
+	}
+}
+
+div#form_content {
+  width: 1200px;
+  margin: 10px;
+  form#opinion_form
+  {
+    a {
+      color: #00B7FF;
+    }
+
+    form {     
+      padding: 20px;     
+    }
+
+    label {
+      display: block;
+      
+      input {
+        width: @medium-text-inputLength;
+        display: block;
+        margin-bottom: 10px;
+      }
+      
+      textarea {
+        width: @medium-textAreaWidth;
+        height: 200px;
+        display: block;
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+    } 
+  }
 }

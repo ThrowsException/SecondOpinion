@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  include partials/header
+  
+  h2#welcome_message #{form} SecondOpinion
+  div#form_content
+    form#opinion_form(action='/saveForm', method='post')
+      
+      include partials/patient_info
+        
+      p 
+        b
+          | BY ENGAGING OUR SERVICES, YOU ACKNOWLEDGE AND AGREE TO ASSUME THE RISK OF THESE LIMITATIONS. 
+          | YOU FURTHER UNDERSTAND THAT NO WARRANTY OR GUARANTEE HAS BEEN MADE TO YOU CONCERNING ANY 
+          | PARTICULAR RESULT OR CURE OF YOUR CONDITION.
+
+      label
+        | Signature:
+        input(name='disclaimer_signature')
+       
+      label
+        | Date:
+        input(name='disclaimer_date', type='date')
+        
+      label
+        | What is your diagnoses/disease/disorder in question:
+        textarea(name='diagnoses')
+        
+      label
+        | What explicit questions do you want answered within the remote second opinion?:
+        textarea(name='questions')
+      
+      label
+        | What do you hope to gain by engaging the services of a remote second opinion? :
+        textarea(name='reason')
+      
+      input(type='submit', value='Submit')

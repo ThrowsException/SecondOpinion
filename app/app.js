@@ -93,6 +93,13 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+app.get('/:form', function(req, res) {
+    
+    var forms = [];
+    forms['brain_tumor'] = 'Brain Tumor';
+    
+    res.render(req.params.form, { form: forms[req.params.form] } );
+});;
 
 app.get('/admin', ensureAuthenticated, function(req, res){
     debugger;
@@ -106,6 +113,7 @@ app.post('/login',
                                    failureRedirect: '/',
                                    failureFlash: false })
 );
+
 app.post('/saveForm', function(req, res) {           
     req.models.visit.create({
         diagnoses: req.body.diagnoses, 
