@@ -1,0 +1,107 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300);
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+input {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+p {
+  margin: 10px;
+}
+b {
+  font-weight: bold;
+}
+header div {
+  height: 60px;
+  background: #3078F0;
+  color: #FFFFFF;
+}
+header div h1 {
+  font-size: 40px;
+  margin: 8px 0px;
+}
+header div * {
+  float: left;
+}
+header div form {
+  margin: 15px 2px;
+  float: right;
+}
+#welcome_message {
+  font-size: 24px;
+  margin: 20px 10px;
+}
+#landing_screen {
+  margin-left: 10px;
+}
+#diseases {
+  counter-reset: li;
+}
+#diseases a {
+  position: relative;
+  display: block;
+  padding: .4em .4em .4em .8em;
+  *padding: .4em;
+  margin: .5em 0 .5em 2.5em;
+  background: #ddd;
+  color: #444;
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+#diseases a:hover {
+  background: #eee;
+}
+#diseases a:hover:after {
+  left: -0.5em;
+  border-left-color: #3078F0;
+}
+#diseases a:before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  left: -2.5em;
+  top: 50%;
+  margin-top: -1em;
+  background: #3078F0;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+#diseases a:after {
+  position: absolute;
+  content: '';
+  border: .5em solid transparent;
+  left: -1em;
+  top: 50%;
+  margin-top: -0.5em;
+  transition: all 0.3s ease-out;
+}
+div#form_content {
+  width: 1200px;
+  margin: 10px;
+}
+div#form_content form#opinion_form a {
+  color: #00B7FF;
+}
+div#form_content form#opinion_form form {
+  padding: 20px;
+}
+div#form_content form#opinion_form label {
+  display: block;
+}
+div#form_content form#opinion_form label input {
+  width: 400px;
+  display: block;
+  margin-bottom: 10px;
+}
+div#form_content form#opinion_form label textarea {
+  width: 400px;
+  height: 200px;
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
