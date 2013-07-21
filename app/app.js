@@ -93,19 +93,19 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+
+app.get('/admin', ensureAuthenticated, function(req, res){
+  req.models.visit.find(function(err, visits){
+    res.render('admin', { visits: visits });
+  }); 
+});
+
 app.get('/:form', function(req, res) {
     
     var forms = [];
     forms['brain_tumor'] = 'Brain Tumor';
     
     res.render(req.params.form, { form: forms[req.params.form] } );
-});;
-
-app.get('/admin', ensureAuthenticated, function(req, res){
-    debugger;
-  req.models.visit.find(function(err, visits){
-    res.render('admin', { visits: visits });
-  }); 
 });
 
 app.post('/login',

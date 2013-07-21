@@ -1,7 +1,5 @@
 extends layout
 
 block content
-  h1 Admin Console
-  
-  -for visit in visits
-    li #{visit.diagnoses} #{visit.date}
+    -for visit in visits
+      li #{visit.diagnoses} #{visit.date}
