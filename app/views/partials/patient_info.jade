@@ -1,23 +1,161 @@
-label Name:
-    input(name='name')
+fieldset
+  legend Patient Information
+  div.form-group
+    label Name:
+    input.form-control(name='name')
 
-  label Date:
-    input(name='signature_date', type='date')
+  div.row
+    div.form-group.col-lg-4
+      label Date:
+      input.form-control(name='disclaimer_date', type='date')
 
-  label Treating/Referring Physician Name:
-    input(name='physician_name')
+  div.row
+    div.form-group.col-lg-4
+      label Birthday:
+      input.form-control(name='bithday', type='date')
 
-  label Street Address:
-    input(name='address')
+  div.row
+    div.form-group.col-lg-4
+      label Age:
+      input.form-control(name='age', type='number')
 
-  label City:
-    input(name='city')
+  div.form-group
+    label Street Address:
+    input.form-control(name='address')
 
-  label State:
-    input(name='state')
+  div.form-group
+    label City:
+    input.form-control(name='city')
 
-  label Zip:
-    input(name='zip')
+  div.form-group
+    label State:
+    input.form-control(name='state')
 
-  label Phone Number:
-    input(name='phone')
+  div.form-group
+    label Zip:
+    input.form-control(name='zip')
+
+  div.form-group
+    label Home Phone:
+    input.form-control(name='home_phone', type='tel')
+
+  div.form-group
+    label Cell Phone:
+    input.form-control(name='cell_phone', type='tel')
+
+  div.form-group
+    label Height:
+    input.form-control(name='height')
+
+  div.form-group
+    label Weight:
+    input.form-control(name='weight')
+
+  div.form-group
+    label Handedness:
+    div.radio
+      label
+        input(type='radio', value='right', name='hand')
+        | Right
+    div.radio
+      label
+        input(type='radio', value='left', name='hand') 
+        | Left
+    div.radio
+      label
+        input(type='radio', value='ambidexterous', name='hand') 
+        | Ambidexterous
+  
+  div.form-group
+    label Are you involved in any litigation with regards to your health?  
+    div.radio
+      input(type='radio', value='no', name='litigation') 
+      | No
+    div.radio
+      input(type='radio', value='yes', name='litigation') 
+      | Yes
+
+  div.form-group
+    label If yes, please provide details and your attorney’s name and phone number:
+    textarea.form-control(name='litigation_information')
+
+fieldset
+  div.form-group.alert.alert-info
+    label If the patient is a minor or disabled, please provide name of parent or legal gaurdian and phone number
+
+    div.form-group
+      label Name:
+      input.form-control(name='guardian_name')
+
+    div.form-group
+      label Phone:
+      input.form-control(name='guardian_phone', type='tel')
+
+fieldset
+  legend Emergency Contact
+  
+  div.form-group.form-inline
+    div.form-group
+      label Name:
+      input.form-control(name='emergency_contact_name')
+    
+    div.form-group
+      label Phone:
+      input.form-control(name='emergency_contact_phone', type='tel')
+
+fieldset
+  legend Primary Care Physician
+  
+  div.form-group
+    label Name:
+    input.form-control(name='primary_care_physician_name')
+  
+  div.form-group
+    label Address:
+    input.form-control(name='primary_care_physician_name')
+  
+  div.form-group
+    label Phone:
+    input.form-control(name='primary_care_physician_phone', type='tel')
+  
+  div.form-group
+    label Fax:
+    input.form-control(name='primary_care_physician_fax', type='tel')
+
+fieldset
+  legend Referring Physician
+  
+  div.form-group
+    label Name:
+    input.form-control(name='primary_care_physician_name')
+  
+  div.form-group
+    label Address:
+    input.form-control(name='primary_care_physician_name')
+  
+  div.form-group
+    label Phone:
+    input.form-control(name='primary_care_physician_phone', type='tel')
+  
+  div.form-group
+    label Fax:
+    input.form-control(name='primary_care_physician_fax', type='tel')
+
+fieldset
+  legend Other Physician
+  
+  div.form-group
+    label Name:
+    input.form-control(name='primary_care_physician_name')
+  
+  div.form-group
+    label Address:
+    input.form-control(name='primary_care_physician_name')
+  
+  div.form-group
+    label Phone:
+    input.form-control(name='primary_care_physician_phone', type='tel')
+  
+  div.form-group
+    label Fax:
+    input.form-control(name='primary_care_physician_fax', type='tel')

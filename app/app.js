@@ -112,6 +112,7 @@ app.get('/:form', function(req, res) {
 
     var forms = [];
     forms['brain_tumor'] = 'Brain Tumor';
+    forms['spine_health'] = 'Spine Health';
 
     res.render(req.params.form, { form: forms[req.params.form] } );
 });

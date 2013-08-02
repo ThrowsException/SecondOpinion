@@ -1,8 +1,8 @@
 header
-  div
-    h1 SecondOpinion
+  div.navbar
+    a.navbar-brand SecondOpinion
     
-    form(action='/login', method='post')
+    form.navbar-form.form-inline.pull-right(action='/login', method='post')
       input(type="text", placeholder="Username", name="username") 
       input(type='password', placeholder="Password", name='password')
       button(value='Login') Login

@@ -2,22 +2,12 @@ extends layout
 
 block content
   include partials/header
-  h2#welcome_message Welcome to #{title}
-  div#landing_screen
+  div.container#landing_screen
+    h2#welcome_message Welcome to #{title}
     h3 Tell us why you're here today
     
-    ul#diseases
-      li 
+    ul.list-group#diseases
+      li.list-group-item
         a(href='brain_tumor') Brain Tumor
-      li 
-        a(href='brain_tumor') Headache
-      li
-        a(href='brain_tumor') Hydrocephalus and CSF Disorders
-      li
-        a(href='brain_tumor') Neuroimmunology & Neurological Infections
-      li
-        a(href='brain_tumor') Neuromuscular Pathology
-      li
-        a(href='brain_tumor') Pediatric Neurology
-      li
-        a(href='brain_tumor') Spine Neurosurgery
+      li.list-group-item
+        a(href='spine_health') Spine Health
