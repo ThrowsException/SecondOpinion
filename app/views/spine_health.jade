@@ -12,33 +12,157 @@ block content
       fieldset
       
         include partials/patient_info
-          
-        div.form-group
-          p 
-            b
-              | BY ENGAGING OUR SERVICES, YOU ACKNOWLEDGE AND AGREE TO ASSUME THE RISK OF THESE LIMITATIONS. 
-              | YOU FURTHER UNDERSTAND THAT NO WARRANTY OR GUARANTEE HAS BEEN MADE TO YOU CONCERNING ANY 
-              | PARTICULAR RESULT OR CURE OF YOUR CONDITION.
+        
+      fieldset
+        legend Major Complaint and History of Presnt Illness
 
         div.form-group
-          label Signature:
-          input.form-control(name='disclaimer_signature')
-        
-        div.row
-          div.form-group.col-lg-4
-            label Date:
-            input.form-control(name='disclaimer_date', type='date')
+          label What is Your most Major Complaint: 
+          textarea.form-control(name='reason_for_visit')
+          span.help-block Explain why you are here, including symptons, body part, etc.
+
+        div.form-group
+          label Is This An Injury
+          div.radio
+            label
+              input(type='radio', value='yes', name='injury', checked)
+              | Yes
+          div.radio
+            label
+              input(type='radio', value='no', name='injury') 
+              | No
+
+        fieldset
+          div.form-group.alert.alert-info
+            label If yes please provide the date the injury occurred
+            textarea.form-control(name='date_of_injury')
+
+        div.form-group
+          label Is this related to a motor vehicle accident
+          div.radio
+            label
+              input(type='radio', value='yes', name='motor_vehicle', checked)
+              | Yes
+          div.radio
+            label
+              input(type='radio', value='no', name='motor_vehicle') 
+              | No
+
+        div.form-group
+          label Is this related to work
+          div.radio
+            label
+              input(type='radio', value='yes', name='work', checked)
+              | Yes
+          div.radio
+            label
+              input(type='radio', value='no', name='work') 
+              | No
+
+        div.form-group
+          label Describe in detail what happened: 
+          textarea.form-control(name='what_happened')
+
+        div.form-group
+          label Describe your pain:
+          textarea.form-control(name='reason_for_visit')
+          span.help-block dull, sharp, constant, stabbing, numb, tingling, electric-like, ache, other
+
+        div.form-group
           
+          label Use pain scale to rate pain
+
+          div.form-group
+            label.radio-inline
+              input(type='radio', value='1', name='pain_severity')
+              | 1
+         
+            label.radio-inline
+              input(type='radio', value='2', name='pain_severity') 
+              | 2
+          
+            label.radio-inline
+              input(type='radio', value='3', name='pain_severity')
+              | 3
+          
+            label.radio-inline
+              input(type='radio', value='4', name='pain_severity') 
+              | 4
+          
+            label.radio-inline
+              input(type='radio', value='5', name='pain_severity', checked)
+              | 5
+          
+            label.radio-inline
+              input(type='radio', value='6', name='pain_severity') 
+              | 6
+
+            label.radio-inline
+              input(type='radio', value='7', name='pain_severity')
+              | 7
+          
+            label.radio-inline
+              input(type='radio', value='8', name='pain_severity') 
+              | 8
+
+            label.radio-inline
+              input(type='radio', value='9', name='pain_severity')
+              | 9
+          
+            label.radio-inline
+              input(type='radio', value='10', name='pain_severity') 
+              | 10
+
         div.form-group
-          label What is your diagnoses/disease/disorder in question:
-          textarea.form-control(name='diagnoses')
-        
-        div.form-group  
-          label What explicit questions do you want answered within the remote second opinion?:
-          textarea.form-control(name='questions')
-        
+          label Use Figures below to show where your pain is:
+          p Not Implemented Yet
+
         div.form-group
-          label What do you hope to gain by engaging the services of a remote second opinion? :
-          textarea.form-control(name='reason')
-        
+          label What triggers the pain:
+          textarea.form-control(name='trigger')          
+
+        div.form-group
+          label What time of day does the pain start:
+          textarea.form-control(name='time_of_pain')
+
+        div.form-group
+          label What makes it better:
+          textarea.form-control(name='better')
+
+        div.form-group
+          label What makes it worse:
+          textarea.form-control(name='worse')
+
+        div.form-group
+          label Has this area ever been injured before:
+          div.radio
+            label
+              input(type='radio', value='yes', name='prior_injury', checked)
+              | Yes
+          div.radio
+            label
+              input(type='radio', value='no', name='prior_injury') 
+              | No
+
+        fieldset
+          div.form-group.alert.alert-info
+            label If yes who treated you and when:
+            textarea.form-control(name='prior_injury_info')
+
+        div.form-group
+          label Have you ever had surgery to this area:
+          div.radio
+            label
+              input(type='radio', value='yes', name='prior_surgery', checked)
+              | Yes
+          div.radio
+            label
+              input(type='radio', value='no', name='prior_surgery') 
+              | No
+
+        fieldset
+          div.form-group.alert.alert-info
+            label If yes when and by what surgeon
+            textarea.form-control(name='prior_surgery_info')
+       
         button.btn.btn-default(type='submit') Submit
