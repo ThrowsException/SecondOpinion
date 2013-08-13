@@ -1,5 +1,8 @@
 extends layout
 
 block content
-    -for visit in visits
-      li #{visit.diagnoses} #{visit.date}
+	include partials/header
+	div.container#landing_screen
+		ul.list-group
+		-for visit in visits
+			li.list-group-item #{visit.diagnoses} #{visit.date}

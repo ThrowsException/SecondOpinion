@@ -103,7 +103,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 
 app.get('/admin', ensureAuthenticated, function(req, res){
-  req.models.visit.find(function(err, visits){
+  req.models.visit.find({}, ["date", "Z"], function(err, visits){
     res.render('admin', { visits: visits });
   });
 });
