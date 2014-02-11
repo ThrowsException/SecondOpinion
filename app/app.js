@@ -2,7 +2,6 @@ var express = require('express')
   , routes = require('./routes')
   , admin = require('./routes/admin')
   , http = require('http')
-  , https = require('https')
   , crypto = require('crypto')
   , lessMiddleware = require('less-middleware')
   , orm = require('orm')
@@ -64,13 +63,15 @@ passport.use(new LocalStrategy(
         if (!user[0]) {
           return done(null, false, { message: 'Incorrect username.' });
         }
-        crypto.pbkdf2(password, user[0].salt, 10000, 512, function(err, derivedKey) {
+        crypto.pbkdf2(password, user[0].salt, 10000, 64, function(err, derivedKey) {
           password = derivedKey.toString('base64');
           console.log(password);
           if (!user[0].password || user[0].password !== password) {
+            console.log('%s %s', user[0].password, password);
             return done(null, false, { message: 'Incorrect password.' });
           }
           else {
+            console.log("We did it");
             return done(null, user[0]);
           }
         });
@@ -92,6 +93,7 @@ app.use(express.cookieSession({ secret: cookieSecret, cookie: { maxAge: 24 * 60 
 app.use(express.methodOverride());
 app.use(passport.initialize());
 app.use(passport.session());
+//app.use(ensureAuthenticated);
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -122,6 +124,26 @@ app.post('/login',
                                    failureRedirect: '/',
                                    failureFlash: false })
 );
+
+app.get('/signup', function(req, res) {
+  res.render('signup');
+});
+
+app.post('/user', function(req, res) {
+  var salt = crypto.randomBytes(16).toString('base64');
+  var password = crypto.pbkdf2Sync(req.body.password, salt, 10000, 64).toString('base64');
+
+  req.models.user.create({
+    username: req.body.username, 
+    password: password,
+    salt: salt,
+    role: 'admin'
+  }, function(err){
+      console.log(err);
+  });
+
+  res.redirect('/');
+});
 
 app.post('/saveForm', function(req, res) {
   req.models.visit.create({

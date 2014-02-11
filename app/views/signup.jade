@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  include partials/header
+  form(action='user', method='post')
+    input(type='text', class='form-control', name='username', placeholder='username')
+    input(type='password', class='form-control', name='password', placeholder='password')
+    input(type='submit')
